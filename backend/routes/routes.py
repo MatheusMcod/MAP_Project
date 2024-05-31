@@ -1,9 +1,9 @@
 from fastapi import APIRouter
-from controllers.HomeController import HomeController
+from controllers.PatientController import PatientController
+from infra.BodyRequestStructure.BodyPatient import BodyPatient
 
 router_instance = APIRouter()
 
-@router_instance.get("/")
-def welcome():
-  result = HomeController().home_msg()
-  return result
+@router_instance.post("/patient")
+async def create_patient_route(body_patient: BodyPatient):
+  return await PatientController().create_patient(body_patient)
