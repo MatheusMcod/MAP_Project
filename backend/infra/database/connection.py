@@ -12,7 +12,7 @@ class DBConnectionHandler:
 			os.getenv("PASSWORD"),
 			os.getenv("HOST"),
 			os.getenv("PORT"),
-			os.getenv("DATABASE")
+			os.getenv("DATABASE").replace("%", "%%")
 		)
 		self.__engine = self.__create_database_engine()
 		self.session = None
