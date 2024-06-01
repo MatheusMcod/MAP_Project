@@ -21,4 +21,4 @@ app_instance.add_middleware(
 )
 
 if __name__ == "__main__":
-  uvicorn.run(app_instance, host="0.0.0.0", port=4444)
+  uvicorn.run("main:app_instance", host="0.0.0.0", port=4444, reload=True)

@@ -34,11 +34,6 @@ Rodando o Projeto:
 python main.py
 ```
 
-Rodando em modo de desenvolvimento
-```sh
-uvicorn main:app_instance --reload
-```
-
 ## DataBase
 Crie um arquivo <span style="color: yellow; font-weight: bold;">.env</span> com base no <span style="color: yellow; font-weight: bold;">.env.example</span>, passando os dados da sua database.
 

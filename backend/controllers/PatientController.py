@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from models.Patient import Patient
+import json
 import re
 
 class PatientController:
@@ -10,5 +11,13 @@ class PatientController:
 			data_special_conditions = decode_body_patient.pop("special_conditions")
 			response_patient = Patient().insert_patient(decode_body_patient, data_special_conditions)
 			return jsonable_encoder({"response": "Success registration", "status": response_patient})
+		except Exception as exception:
+			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
+
+	async def get_all_patients(self):
+		try:
+			data_patients = Patient().search_all_patients()
+			print(data_patients)
+			return jsonable_encoder({"response": "Success search", "status": data_patients})
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
