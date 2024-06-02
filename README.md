@@ -55,7 +55,11 @@ Rodando o projeto:
 npm run dev
 ```
 
-# Links
+Rodando a documentação do frontend com storybook
+```sh
+npm run storybook
+```
 
+# Links
 [Documentação da API](https://documenter.getpostman.com/view/26661894/2sA3QwapCx) <br>
 [Hospedagem do Projeto](URL)

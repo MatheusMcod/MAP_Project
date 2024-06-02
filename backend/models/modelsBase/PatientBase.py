@@ -24,6 +24,3 @@ class PatientBase(Base):
 	attending_doctor = Column(String)
 
 	special_conditions = relationship("SpecialConditionsBase", back_populates="patient")
-
-	def __repr__(self):
-		return f"PatientBase(id={self.id}, name={self.name}, age={self.age}, gender={self.gender}, phone={self.phone})"
