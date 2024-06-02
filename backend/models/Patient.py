@@ -14,7 +14,7 @@ class Patient:
 				data_special_conditions_insert = SpecialConditionsBase(**data_special_conditions, patient_id=data_patient_insert.id)
 				db.session.add(data_special_conditions_insert)
 				db.session.commit()
-				return True
+				return {"status": True,"Response Creation": "Successful"}
 			except Exception as exception:
 				db.session.rollback()
 				raise exception
@@ -26,4 +26,18 @@ class Patient:
 				data_patients = db.session.query(PatientBase).join(PatientBase.special_conditions).options(joinedload(PatientBase.special_conditions)).all()
 				return data_patients
 			except Exception as exception:
+				raise exception
+
+	def delete_patient(self, id):
+		with DBConnectionHandler() as db:
+			try:
+				patient_to_delete = db.session.query(PatientBase).filter(PatientBase.id == id).first()
+				if patient_to_delete:
+					db.session.delete(patient_to_delete)
+					db.session.commit()
+					return {"status": True,"Response delete": "Successful"}
+				else:
+					return {"status": False,"Response Search": "Patient Not Found"}
+			except Exception as exception:
+				db.session.rollback()
 				raise exception

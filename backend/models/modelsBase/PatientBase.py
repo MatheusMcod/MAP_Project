@@ -23,4 +23,4 @@ class PatientBase(Base):
 	description_problem = Column(String, nullable=False)
 	attending_doctor = Column(String)
 
-	special_conditions = relationship("SpecialConditionsBase", back_populates="patient")
+	special_conditions = relationship("SpecialConditionsBase", back_populates="patient", cascade="all, delete-orphan")
