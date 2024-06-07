@@ -1,5 +1,5 @@
-from fastapi import HTTPException
-from fastapi.encoders import jsonable_encoder
+from fastapi import HTTPException, status
+from fastapi.responses import JSONResponse
 from models.Patient import Patient
 import json
 import re
@@ -10,14 +10,27 @@ class PatientController:
 			decode_body_patient = body_patient.dict()
 			data_special_conditions = decode_body_patient.pop("special_conditions")
 			response_patient = Patient().insert_patient(decode_body_patient, data_special_conditions)
-			return jsonable_encoder({"response": "Success registration", "date": response_patient})
+
+			if response_patient["status"]:
+				return JSONResponse(
+					status_code = status.HTTP_201_CREATED,
+					content = {"Status": response_patient["status"], "date": response_patient["Response_Creation"]}
+				)
+			else:
+				return JSONResponse(
+					status_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
+					content = {"response"}
+				)
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
 
 	async def get_all_patients(self):
 		try:
 			data_patients = Patient().search_all_patients()
-			return jsonable_encoder({"response": "Success search", "date": data_patients})
+			return JSONResponse(
+				status_code = status.HTTP_200_OK,
+     		content = {"Status": "True", "date": data_patients}
+       )
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
 
@@ -26,7 +39,18 @@ class PatientController:
 			decode_body_patient = body_patient.dict()
 			data_special_conditions = decode_body_patient.pop("special_conditions")
 			response_patient = Patient().update_patient(id, decode_body_patient, data_special_conditions)
-			return jsonable_encoder({"response": "Success registration", "date": response_patient})
+
+			if response_patient["status"]:
+				return JSONResponse(
+					status_code = status.HTTP_200_OK,
+					content = {"Status": response_patient["status"], "date": response_patient["Response_Update"]}
+				)
+			else:
+				return JSONResponse(
+					status_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
+					content = {"Status": response_patient["status"], "date": response_patient["Response_Update"]}
+				)
+
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
 
@@ -34,8 +58,14 @@ class PatientController:
 		try:
 			data_delete = Patient().delete_patient(id)
 			if data_delete["status"]:
-				return jsonable_encoder({"response": "Success delete", "date": data_delete})
+				return JSONResponse(
+					status_code = status.HTTP_200_OK,
+      		content = {"Status": data_delete["status"], "date": data_delete["Response"]}
+        )
 			else:
-				return jsonable_encoder({"response": "Error delete", "date": data_delete})
+				return JSONResponse(
+					status_code = status.HTTP_404_NOT_FOUND,
+      		content = {"Status": data_delete["status"], "date": data_delete["Response"]}
+        )
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))

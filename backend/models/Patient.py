@@ -1,6 +1,7 @@
 from infra.database.connection import DBConnectionHandler
 from models.modelsBase.PatientBase import PatientBase
 from models.modelsBase.SpecialConditionsBase import SpecialConditionsBase
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import joinedload
 from sqlalchemy import update
 
@@ -15,9 +16,17 @@ class Patient:
 				data_special_conditions_insert = SpecialConditionsBase(**data_special_conditions, patient_id=data_patient_insert.id)
 				db.session.add(data_special_conditions_insert)
 				db.session.commit()
-				return {"status": True,"Response Creation": "Successful"}
+				return {"status": True, "Response_Creation": [data_patient, data_special_conditions]}
 			except Exception as exception:
 				db.session.rollback()
+				raise exception
+
+	def search_all_patients(self):
+		with DBConnectionHandler() as db:
+			try:
+				data_patients = db.session.query(PatientBase).join(PatientBase.special_conditions).options(joinedload(PatientBase.special_conditions)).all()
+				return jsonable_encoder(data_patients)
+			except Exception as exception:
 				raise exception
 
 	def update_patient(self, id, data_patient, data_special_conditions):
@@ -27,18 +36,11 @@ class Patient:
 				db.session.query(SpecialConditionsBase).filter(SpecialConditionsBase.patient_id == id).update(data_special_conditions)
 
 				db.session.commit()
-				return {"status": True, "Response Update": "Successful"}
+				return {"status": True, "Response_Update": [data_patient, data_special_conditions]}
 			except Exception as exception:
 				db.session.rollback()
 				raise exception
 
-	def search_all_patients(self):
-		with DBConnectionHandler() as db:
-			try:
-				data_patients = db.session.query(PatientBase).join(PatientBase.special_conditions).options(joinedload(PatientBase.special_conditions)).all()
-				return data_patients
-			except Exception as exception:
-				raise exception
 
 	def delete_patient(self, id):
 		with DBConnectionHandler() as db:
@@ -47,9 +49,9 @@ class Patient:
 				if patient_to_delete:
 					db.session.delete(patient_to_delete)
 					db.session.commit()
-					return {"status": True,"Response delete": "Successful"}
+					return {"status": True, "Response": "Successful"}
 				else:
-					return {"status": False,"Response Search": "Patient Not Found"}
+					return {"status": False,"Response": "Patient Not Found"}
 			except Exception as exception:
 				db.session.rollback()
 				raise exception
