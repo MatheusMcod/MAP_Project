@@ -2,6 +2,7 @@ from infra.database.connection import DBConnectionHandler
 from models.modelsBase.PatientBase import PatientBase
 from models.modelsBase.SpecialConditionsBase import SpecialConditionsBase
 from sqlalchemy.orm import joinedload
+from sqlalchemy import update
 
 class Patient:
 	def insert_patient(self, data_patient, data_special_conditions):
@@ -19,6 +20,17 @@ class Patient:
 				db.session.rollback()
 				raise exception
 
+	def update_patient(self, id, data_patient, data_special_conditions):
+		with DBConnectionHandler() as db:
+			try:
+				db.session.query(PatientBase).filter(PatientBase.id == id).update(data_patient)
+				db.session.query(SpecialConditionsBase).filter(SpecialConditionsBase.patient_id == id).update(data_special_conditions)
+
+				db.session.commit()
+				return {"status": True, "Response Update": "Successful"}
+			except Exception as exception:
+				db.session.rollback()
+				raise exception
 
 	def search_all_patients(self):
 		with DBConnectionHandler() as db:

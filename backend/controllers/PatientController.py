@@ -21,6 +21,15 @@ class PatientController:
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
 
+	async def update_to_patient(self, id, body_patient):
+		try:
+			decode_body_patient = body_patient.dict()
+			data_special_conditions = decode_body_patient.pop("special_conditions")
+			response_patient = Patient().update_patient(id, decode_body_patient, data_special_conditions)
+			return jsonable_encoder({"response": "Success registration", "date": response_patient})
+		except Exception as exception:
+			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
+
 	async def delete_patient_by_id(self, id):
 		try:
 			data_delete = Patient().delete_patient(id)

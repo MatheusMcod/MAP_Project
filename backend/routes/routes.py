@@ -12,6 +12,10 @@ async def create_patient_route(body_patient: BodyPatient):
 async def search_patient_route():
   return await PatientController().get_all_patients()
 
+@router_instance.put("/patient/{patient_id}")
+async def update_patient_route(patient_id: int, body_patient: BodyPatient):
+  return await PatientController().update_to_patient(patient_id, body_patient)
+
 @router_instance.delete("/patient/{patient_id}")
 async def delete_patient_route(patient_id: int):
   return await PatientController().delete_patient_by_id(patient_id)
