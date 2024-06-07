@@ -9,7 +9,7 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
-from database.connection import DBConnectionHandler
+from infra.database.connection import DBConnectionHandler
 from sqlalchemy import text
 
 
