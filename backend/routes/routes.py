@@ -1,8 +1,14 @@
 from fastapi import APIRouter
 from controllers.PatientController import PatientController
+from controllers.AuthController import AuthController
 from infra.BodyRequestStructure.BodyPatient import BodyPatient
+from infra.BodyRequestStructure.BodyUser import BodyUser
 
 router_instance = APIRouter()
+
+@router_instance.post("/auth/register")
+async def register_patient_route(body_user: BodyUser):
+	return await AuthController().register_user(body_user)
 
 @router_instance.post("/patient")
 async def create_patient_route(body_patient: BodyPatient):
