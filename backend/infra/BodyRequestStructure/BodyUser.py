@@ -1,9 +1,10 @@
 import re
 from pydantic import BaseModel, validator
+from typing import Optional
 
 class BodyUser(BaseModel):
 	username: str
-	email: str
+	email: Optional[str] = None
 	password: str
 
 	@validator('username')
