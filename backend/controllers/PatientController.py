@@ -1,8 +1,6 @@
 from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
 from models.Patient import Patient
-import json
-import re
 
 class PatientController:
 	async def create_patient(self, body_patient):
@@ -14,12 +12,12 @@ class PatientController:
 			if response_patient["status"]:
 				return JSONResponse(
 					status_code = status.HTTP_201_CREATED,
-					content = {"Status": response_patient["status"], "date": response_patient["Response_Creation"]}
+					content = {"Status": response_patient["status"], "data": response_patient["Response_Creation"]}
 				)
 			else:
 				return JSONResponse(
 					status_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
-					content = {"response"}
+					content = {"response": response_patient}
 				)
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
@@ -29,7 +27,7 @@ class PatientController:
 			data_patients = Patient().search_all_patients()
 			return JSONResponse(
 				status_code = status.HTTP_200_OK,
-     		content = {"Status": "True", "date": data_patients}
+     		content = {"Status": "True", "data": data_patients}
        )
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))
@@ -43,12 +41,12 @@ class PatientController:
 			if response_patient["status"]:
 				return JSONResponse(
 					status_code = status.HTTP_200_OK,
-					content = {"Status": response_patient["status"], "date": response_patient["Response_Update"]}
+					content = {"Status": response_patient["status"], "data": response_patient["Response_Update"]}
 				)
 			else:
 				return JSONResponse(
 					status_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
-					content = {"Status": response_patient["status"], "date": response_patient["Response_Update"]}
+					content = {"Status": response_patient["status"], "data": response_patient["Response_Update"]}
 				)
 
 		except Exception as exception:
@@ -60,12 +58,12 @@ class PatientController:
 			if data_delete["status"]:
 				return JSONResponse(
 					status_code = status.HTTP_200_OK,
-      		content = {"Status": data_delete["status"], "date": data_delete["Response"]}
+      		content = {"Status": data_delete["status"], "data": data_delete["Response"]}
         )
 			else:
 				return JSONResponse(
 					status_code = status.HTTP_404_NOT_FOUND,
-      		content = {"Status": data_delete["status"], "date": data_delete["Response"]}
+      		content = {"Status": data_delete["status"], "data": data_delete["Response"]}
         )
 		except Exception as exception:
 			raise HTTPException(status_code=500, detail="Error processing request: " + str(exception))

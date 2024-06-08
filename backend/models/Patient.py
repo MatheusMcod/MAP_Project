@@ -3,7 +3,6 @@ from models.modelsBase.PatientBase import PatientBase
 from models.modelsBase.SpecialConditionsBase import SpecialConditionsBase
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import joinedload
-from sqlalchemy import update
 
 class Patient:
 	def insert_patient(self, data_patient, data_special_conditions):
