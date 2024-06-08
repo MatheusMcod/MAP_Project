@@ -1,0 +1,65 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 4rem;
+  background-color: #0c5a72e0;
+  transition: width 0.3s;
+  overflow: hidden;
+  z-index: 1000;
+
+	p {
+		display: none;
+	}
+}
+
+.sidebar.open {
+  width: 200px;
+
+	p {
+		display: block;
+	}
+}
+
+.sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon {
+  color: white;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.dashboard-button, .patient-button, .user-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+	padding: 0.5rem;
+	width: 100%;
+	height: 3rem;
+	background-color: #0c5a7200;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.dashboard-button:hover , .patient-button:hover , .user-button:hover {
+	background-color: #0c5a72e0;
+}
+
+.dashboard-button-open, .patient-button-open, .user-button-open {
+	justify-content: left;
+	padding-left: 20px;
+
+	p {
+		color: white;
+		font-weight: 600;
+		margin-left: 15px;
+	}
+}
+
