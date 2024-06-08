@@ -1,5 +1,5 @@
 from app import App
-from routes.routes import router_instance
+from routes.routes import router_instance, auth_router
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -12,6 +12,7 @@ origins = [
 
 app_instance = App().get_App_Instance()
 app_instance.include_router(router_instance)
+app_instance.include_router(auth_router)
 app_instance.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
