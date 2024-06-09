@@ -1,13 +1,20 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/LeftNavBar/LeftNaveBar";
 
 export default function Root() {
-  return (
-    <>
-			<Sidebar />
+	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleSidebar = () => {
+		setIsOpen(!isOpen);
+	};
+
+	return (
+		<>
+			<Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
 			<div>
-				<Outlet />
+				<Outlet context={{ isOpen }} />
 			</div>
-    </>
-  );
+		</>
+	);
 }

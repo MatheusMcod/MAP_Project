@@ -1,41 +1,67 @@
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 4rem;
-  background-color: #0c5a72e0;
-  transition: width 0.3s;
-  overflow: hidden;
-  z-index: 1000;
-
-	p {
-		display: none;
-	}
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 4rem;
+	background-color: #0c5a72e0;
+	transition: width 0.3s;
+	overflow: hidden;
+	z-index: 1000;
 }
 
 .sidebar.open {
-  width: 200px;
-
-	p {
-		display: block;
-	}
+	width: 12rem;
 }
 
 .sidebar-icons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 0;
 }
 
-.icon {
-  color: white;
-  font-size: 24px;
-  margin: 20px 0;
+.sidebar-icons a {
+	text-decoration: none;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 1rem;
+	transition:
+		background-color 0.3s,
+		padding-left 0.3s,
+		justify-content 0.3s;
 }
 
-.dashboard-button, .patient-button, .user-button {
+.sidebar-icons a:hover {
+	background-color: #374151;
+}
+
+.sidebar-icons .icon {
+	font-size: 1.5rem;
+	transition: margin-right 0.3s;
+}
+
+.sidebar.open .sidebar-icons .icon {
+	margin-left: 1rem;
+}
+
+.sidebar-icons p {
+	display: none;
+	opacity: 0;
+	transition: opacity 0.3s;
+	white-space: nowrap;
+	margin: 0;
+}
+
+.sidebar.open .sidebar-icons p {
+	opacity: 1;
+}
+
+.dashboard-button,
+.patient-button,
+.user-button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -43,23 +69,22 @@
 	padding: 0.5rem;
 	width: 100%;
 	height: 3rem;
-	background-color: #0c5a7200;
+	background-color: transparent;
 	cursor: pointer;
 	text-decoration: none;
 }
 
-.dashboard-button:hover , .patient-button:hover , .user-button:hover {
-	background-color: #0c5a72e0;
+.sidebar.open .dashboard-button,
+.sidebar.open .patient-button,
+.sidebar.open .user-button {
+	justify-content: flex-start;
+	padding-left: 1.5rem;
 }
 
-.dashboard-button-open, .patient-button-open, .user-button-open {
-	justify-content: left;
-	padding-left: 20px;
-
-	p {
-		color: white;
-		font-weight: 600;
-		margin-left: 15px;
-	}
+.sidebar.open .dashboard-button p,
+.sidebar.open .patient-button p,
+.sidebar.open .user-button p {
+	display: inline;
+	margin-left: 1rem;
+	font-weight: 600;
 }
-
