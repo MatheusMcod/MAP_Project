@@ -6,8 +6,10 @@ DashboardGrid.propTypes = {
 	cards: PropTypes.arrayOf(
 		PropTypes.shape({
 			title: PropTypes.string.isRequired,
-			content: PropTypes.string.isRequired,
+			content: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+				.isRequired,
 			size: PropTypes.number.isRequired,
+			icon: PropTypes.element,
 		}),
 	).isRequired,
 };
@@ -16,7 +18,11 @@ export default function DashboardGrid({ cards }) {
 		<Grid container spacing={2}>
 			{cards.map((card, index) => (
 				<Grid item xs={12} md={card.size} key={index}>
-					<DashboardCard title={card.title} content={card.content} />
+					<DashboardCard
+						title={card.title}
+						content={card.content}
+						icon={card.icon}
+					/>
 				</Grid>
 			))}
 		</Grid>
