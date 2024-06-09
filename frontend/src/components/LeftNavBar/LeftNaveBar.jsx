@@ -1,17 +1,20 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import { FaHome, FaUser } from "react-icons/fa";
 import { FaHospitalUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "./StyleLeftNavBar.css";
 
-export default function Sidebar() {
-	const [isOpen, setIsOpen] = useState(false);
+Sidebar.propTypes = {
+	isOpen: PropTypes.bool.isRequired,
+	toggleSidebar: PropTypes.func.isRequired,
+};
 
+export default function Sidebar({ isOpen, toggleSidebar }) {
 	return (
 		<div
 			className={`sidebar ${isOpen ? "open" : ""}`}
-			onMouseEnter={() => setIsOpen(true)}
-			onMouseLeave={() => setIsOpen(false)}
+			onMouseEnter={toggleSidebar}
+			onMouseLeave={toggleSidebar}
 		>
 			<div className="sidebar-icons">
 				<Link
