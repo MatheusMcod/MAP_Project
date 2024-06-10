@@ -8,9 +8,13 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
 	const [bodyClass, setBodyClass] = useState("");
+	const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+	const navigate = useNavigate();
 
 	const handleSignIn = () => {
 		setBodyClass("sign-in-js");
@@ -19,6 +23,29 @@ export default function LoginPage() {
 	const handleSignUp = () => {
 		setBodyClass("sign-up-js");
 	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:4444/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+        body: new URLSearchParams({ username: username, password: password }).toString(),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        navigate("/dashboard")
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Invalid credentials');
+    }
+};
 
 	return (
 		<div className={`container ${bodyClass}`}>
@@ -121,14 +148,14 @@ export default function LoginPage() {
 					<p className="description description-second">
 						ou use sua conta de e-mail:
 					</p>
-					<form className="form">
+					<form className="form" onSubmit={handleSubmit}>
 						<label className="label-input" htmlFor="">
 							<Mail className="icon-modify" />
-							<input type="email" placeholder="E-mail" />
+							<input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
 						</label>
 						<label className="label-input" htmlFor="">
 							<Lock className="icon-modify" />
-							<input type="password" placeholder="Senha" />
+							<input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)}/>
 						</label>
 						<a className="password" href="#">
 							esqueceu sua senha?

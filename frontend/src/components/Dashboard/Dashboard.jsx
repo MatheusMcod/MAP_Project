@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import AgePyramidChart from "../Charts/AgePyramidChart";
 import PieChartComponent from "../Charts/PieChartComponent";

@@ -52,14 +52,13 @@ class AuthController:
 					detail = 'Invalid username or password'
 				)
 
-			exp = datetime.now() + timedelta(minutes=os.getenv("JWT_TIME"))
+			exp = datetime.now() + timedelta(minutes=int(os.getenv("JWT_TIME")))
 			payload = {
 				'sub': decode_body_user["username"],
 				'exp': exp,
 			}
 
 			access_token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
-
 			return JSONResponse (
 				status_code = status.HTTP_200_OK,
 				content = {"Status": response_user["status"], "data": jsonable_encoder(response_user_data), "token": access_token}

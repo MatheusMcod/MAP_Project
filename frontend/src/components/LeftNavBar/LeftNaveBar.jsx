@@ -24,6 +24,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 					<FaHome className="icon" /> <p>Dashboard</p>
 				</Link>
 				<Link
+					to="/patients"
 					className={`patient-button ${isOpen ? "patient-button-open" : ""}`}
 				>
 					<FaHospitalUser className="icon" /> <p>Pacientes</p>
