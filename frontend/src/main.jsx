@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-//import ProtectedRoute from "./components/ProtectedRouter/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRouter/ProtectedRoute";
 import PatientsLayout from "./components/Patients/PatientsLayout";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
@@ -15,12 +15,12 @@ import Root from "./routes/root";
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Root />,
+		element: <ProtectedRoute component={Root} />,
 		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: "dashboard",
-				element: <Dashboard />,
+				element: <ProtectedRoute component={Dashboard} />,
 			},
 			{
 				path: "logout",
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "patients",
-				element: <PatientsLayout />,
+				element: <ProtectedRoute component={PatientsLayout} />,
 			},
 		],
 	},

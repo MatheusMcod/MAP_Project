@@ -1,0 +1,37 @@
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa; 
+}
+
+.error-content {
+  text-align: center;
+}
+
+.error-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.error-content h1 {
+  font-size: 3rem;
+  color: #dc3545;
+}
+
+.error-content p {
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+.error-content .error-message {
+  font-size: 1.2rem;
+  color: #343a40;
+  margin-top: 20px;
+}
+
+.error-content * {
+  transition: all 0.3s ease;
+}

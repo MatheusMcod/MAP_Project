@@ -18,7 +18,7 @@ export default function PatientsLayout() {
   };
 
 	useEffect(() => {
-		async function fetchPacients() {
+		async function fetchPatients() {
 			try {
 				const response = await fetch("http://localhost:4444/patient");
 				if (!response.ok) {
@@ -30,7 +30,7 @@ export default function PatientsLayout() {
 				setError(error.message);
 			}
 		}
-		fetchPacients();
+		fetchPatients();
 	}, []);
 
 	return (

@@ -66,11 +66,6 @@ export default function PatientModalAdd({ open, handleClose }) {
 		}
   };
 
-	const handleSubmit = (event) => {
-    event.preventDefault();
-		console.log("OK")
-  };
-
 	const addPatient = async () => {
 		try {
       const response = await fetch("http://localhost:4444/patient", {
@@ -89,6 +84,7 @@ export default function PatientModalAdd({ open, handleClose }) {
 			handleClose();
       console.log("Paciente adicionado com sucesso:", data);
     } catch (error) {
+			handleClose();
       console.error(error);
     }
 	}

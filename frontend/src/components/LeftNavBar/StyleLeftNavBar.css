@@ -1,4 +1,7 @@
 .sidebar {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -62,7 +65,8 @@
 
 .dashboard-button,
 .patient-button,
-.user-button {
+.user-button,
+.logout-button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -77,14 +81,16 @@
 
 .sidebar.open .dashboard-button,
 .sidebar.open .patient-button,
-.sidebar.open .user-button {
+.sidebar.open .user-button,
+.sidebar.open .logout-button {
 	justify-content: flex-start;
 	padding-left: 1.5rem;
 }
 
 .sidebar.open .dashboard-button p,
 .sidebar.open .patient-button p,
-.sidebar.open .user-button p {
+.sidebar.open .user-button p,
+.sidebar.open .logout-button p {
 	display: inline;
 	margin-left: 1rem;
 	font-weight: 600;

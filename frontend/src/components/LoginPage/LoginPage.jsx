@@ -14,6 +14,7 @@ export default function LoginPage() {
 	const [bodyClass, setBodyClass] = useState("");
 	const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('')
 	const navigate = useNavigate();
 
 	const handleSignIn = () => {
@@ -24,7 +25,7 @@ export default function LoginPage() {
 		setBodyClass("sign-up-js");
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmitLogin = async (e) => {
 		e.preventDefault();
     try {
       const response = await fetch('http://localhost:4444/auth/login', {
@@ -45,7 +46,35 @@ export default function LoginPage() {
       console.error('Error:', error);
       alert('Invalid credentials');
     }
-};
+	};
+
+	const handleSubmitRegister = async (e) => {
+		e.preventDefault();
+		try {
+      const response = await fetch("http://localhost:4444/auth/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+					username: username,
+  				email: email,
+    			password: password
+				})
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        navigate("/dashboard")
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Invalid credentials');
+    }
+	}
 
 	return (
 		<div className={`container ${bodyClass}`}>
@@ -90,18 +119,18 @@ export default function LoginPage() {
 					<p className="description description-second">
 						ou utilize seu e-mail para cadastro:
 					</p>
-					<form className="form">
+					<form className="form" onSubmit={handleSubmitRegister}>
 						<label className="label-input" htmlFor="">
 							<Person className="icon-modify" />
-							<input type="text" placeholder="Nome" />
+							<input type="text" placeholder="Nome" onChange={(e) => setUsername(e.target.value)}/>
 						</label>
 						<label className="label-input" htmlFor="">
 							<Mail className="icon-modify" />
-							<input type="email" placeholder="E-mail" />
+							<input type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}/>
 						</label>
 						<label className="label-input" htmlFor="">
 							<Lock className="icon-modify" />
-							<input type="password" placeholder="Senha" />
+							<input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)}/>
 						</label>
 						<button className="btn btn-second">Cadastrar</button>
 					</form>
@@ -148,7 +177,7 @@ export default function LoginPage() {
 					<p className="description description-second">
 						ou use sua conta de e-mail:
 					</p>
-					<form className="form" onSubmit={handleSubmit}>
+					<form className="form" onSubmit={handleSubmitLogin}>
 						<label className="label-input" htmlFor="">
 							<Mail className="icon-modify" />
 							<input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>

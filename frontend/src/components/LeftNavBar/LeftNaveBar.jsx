@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import { FaHome, FaUser } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { FaHospitalUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "./StyleLeftNavBar.css";
+import { CgLogOut } from "react-icons/cg";
 
 Sidebar.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
@@ -29,8 +30,14 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 				>
 					<FaHospitalUser className="icon" /> <p>Pacientes</p>
 				</Link>
-				<Link className={`user-button ${isOpen ? "user-button-open" : ""}`}>
-					<FaUser className="icon" /> <p>Usuarios</p>
+			</div>
+
+			<div className="sidebar-icons">
+				<Link
+				to="/logout"
+				className={`logout-button ${isOpen ? "logout-button-open" : ""}`}>
+
+					<CgLogOut className="icon" /> <p>Logout</p>
 				</Link>
 			</div>
 		</div>
