@@ -6,7 +6,7 @@ from infra.BodyRequestStructure.BodyUser import BodyUser
 from fastapi.security import OAuth2PasswordRequestForm
 from routes.depends import AuthDepends
 
-router_instance = APIRouter()#dependencies=[Depends(AuthDepends.token_verify)])
+router_instance = APIRouter(dependencies=[Depends(AuthDepends.token_verify)])
 auth_router = APIRouter(prefix='/auth')
 
 @auth_router.post("/login")

@@ -32,7 +32,12 @@ export default function Dashboard() {
 	useEffect(() => {
 		async function fetchPacients() {
 			try {
-				const response = await fetch("http://localhost:4444/patient");
+				const token = localStorage.getItem('token');
+				const response = await fetch("http://localhost:4444/patient", {
+					headers: {
+							'Authorization': `Bearer ${token}`
+					}
+				});
 				if (!response.ok) {
 					throw new Error(`Erro ao buscar dados! Status: ${response.status}`);
 				}

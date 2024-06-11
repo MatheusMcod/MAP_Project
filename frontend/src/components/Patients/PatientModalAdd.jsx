@@ -68,9 +68,11 @@ export default function PatientModalAdd({ open, handleClose }) {
 
 	const addPatient = async () => {
 		try {
+			const token = localStorage.getItem('token');
       const response = await fetch("http://localhost:4444/patient", {
         method: 'POST',
         headers: {
+					'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(patient)
