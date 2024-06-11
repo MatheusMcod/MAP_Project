@@ -4,10 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://127.0.0.1",
-    "http://127.0.0.1:8080",
+    "*"
 ]
 
 app_instance = App().get_App_Instance()

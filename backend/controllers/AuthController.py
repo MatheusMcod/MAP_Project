@@ -52,7 +52,9 @@ class AuthController:
 					detail = 'Invalid username or password'
 				)
 
-			exp = datetime.now() + timedelta(minutes=os.getenv("JWT_TIME"))
+
+		  exp = datetime.now() + timedelta(minutes=int(os.getenv("JWT_TIME")))
+
 			payload = {
 				'sub': decode_body_user["username"],
 				'exp': exp,
