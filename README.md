@@ -2,6 +2,16 @@
 
 Projeto de uma dashboard de controle de pacientes, para clínicas ou hospitais.
 
+# Principais Libs Do Prjeto
+
+* FastApi
+* SqlAlchemy
+* Alembic
+* React
+* MaterialUI
+* ReactChartJs2
+
+
 # Como Rodar
 
 Clone o projeto com git clone:
@@ -61,5 +71,4 @@ npm run storybook
 ```
 
 # Links
-[Documentação da API](https://documenter.getpostman.com/view/26661894/2sA3QwapCx) <br>
-[Hospedagem do Projeto](URL)
+[Documentação da API](https://documenter.getpostman.com/view/26661894/2sA3QwapCx)

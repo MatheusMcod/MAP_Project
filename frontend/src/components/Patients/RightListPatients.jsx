@@ -25,9 +25,9 @@ export default function RightListPatients({ patients,  error, filterPatient}) {
         <>
           {filteredPatients.map((patient) => (
               <div key={patient.id} style={styleListItem}>
-								<div><Content.ExibitionIcon /></div>
+					<div><Content.ExibitionIcon /></div>
                 <div>{patient.name} - {patient.age} anos | <FaPhone /> Telephone - {patient.phone} | <LiaAddressCardSolid />CEP - {patient.cep} | <TbUrgent /> Urgencia - {patient.urgency}</div>
-								<div><List.RightArrow /></div>
+					<div><List.RightArrow /></div>
               </div>
           ))}
         </>

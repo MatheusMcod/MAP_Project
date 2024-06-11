@@ -27,7 +27,6 @@ export default function LeftContentBar({ onFilterChange }) {
 					<Content.Button modalProp={handleOpen} content={"Adicionar"} />
 				</div>
 			</div>
-
 			<PatientModalAdd open={open} handleClose={handleClose}/>
 		</Grid>
 	)

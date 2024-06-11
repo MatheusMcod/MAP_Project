@@ -13,7 +13,7 @@ const iconContainer = {
 	width: "5rem",
 	height: "5rem",
 	borderRadius: "50%",
-	backgroundColor: "gray"
+	backgroundColor: "#2293f4"
 }
 
 const iconStyle = {

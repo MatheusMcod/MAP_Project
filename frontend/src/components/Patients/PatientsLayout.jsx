@@ -1,10 +1,10 @@
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { Box } from "@mui/material";
 import LeftContentBar from "./LeftContentBar";
 import RightListPatients from "./RightListPatients";
 import { useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
-import PatientModalAdd from "./PatientModalAdd";
+
 
 export default function PatientsLayout() {
 	const { isOpen } = useOutletContext();

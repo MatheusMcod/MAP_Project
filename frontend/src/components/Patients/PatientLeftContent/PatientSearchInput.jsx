@@ -23,5 +23,5 @@ const input_style = {
 	borderRadius: "10px 0 0 10px",
 	padding: "4px",
 	width: "40%",
-	height: "1rem"
+	height: "1.5rem"
 };
